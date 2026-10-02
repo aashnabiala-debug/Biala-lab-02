@@ -1,0 +1,51 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "9041 Assignment 2",
+    "section": "",
+    "text": "Here is my introduction."
+  },
+  {
+    "objectID": "index.html#intro",
+    "href": "index.html#intro",
+    "title": "9041 Assignment 2",
+    "section": "",
+    "text": "Here is my introduction."
+  },
+  {
+    "objectID": "index.html#methods",
+    "href": "index.html#methods",
+    "title": "9041 Assignment 2",
+    "section": "Methods",
+    "text": "Methods\nParticipants were asked to complete a set of questionnaires."
+  },
+  {
+    "objectID": "index.html#participants",
+    "href": "index.html#participants",
+    "title": "9041 Assignment 2",
+    "section": "Participants",
+    "text": "Participants\nThe sample consisted of 63 participants. Here are the participants’ demographics:\n\n\n\n\n\n\n\n\nParticipant Gender and Ethnicity\n\n\nGender\nAsian/Asian British\nOther ethnic group\nprefer not to say\nwhite/Caucasian\n\n\n\n\nfemale\n32\n0\n1\n17\n\n\nmale\n6\n1\n0\n6"
+  },
+  {
+    "objectID": "index.html#measures",
+    "href": "index.html#measures",
+    "title": "9041 Assignment 2",
+    "section": "Measures",
+    "text": "Measures\nHere is are the measures used: Social Interaction Anxiety Scale Questionnaire, Experiences in Close Relationships Anxiety Subscale Questionnaire, and the Rosenberg Self-Esteem Scale Questionnaire. The Cronbach’s alphas for the scales are 0.9, 0.94, and 0.85, respectively."
+  },
+  {
+    "objectID": "index.html#data-analysis-strategies",
+    "href": "index.html#data-analysis-strategies",
+    "title": "9041 Assignment 2",
+    "section": "Data Analysis Strategies",
+    "text": "Data Analysis Strategies\nItems items 5, 9, and 11 were reverse coded for the Social Interaction Anxiety Scale responses, and items 2, 5, 6, 8, and 9 for Rosenberg Self-Esteem Scale. This was done by adding a minus sign within the column name bracket (e.g., c(…“-SA_5”))"
+  },
+  {
+    "objectID": "index.html#results",
+    "href": "index.html#results",
+    "title": "9041 Assignment 2",
+    "section": "Results",
+    "text": "Results\nHere is the demographics summary table:\n\n\n\n\n\n\nDescriptive Statistics and Reliability\n\n\nSummary of Scale Scores\n\n\nScales\nmean\nmedian\nsd\nmin\nmax\nrange\nalphas\n\n\n\n\nSocial_Interaction_Anxiety_Scale\n2.388889\n2.300000\n0.6987572\n1.100000\n4.1\n3.000000\n0.90\n\n\nExperiences_in_Close_Relationships_Anxiety_Subscale\n3.398589\n3.111111\n1.6209543\n1.111111\n7.0\n5.888889\n0.94\n\n\nRosenberg_Self_Esteem_Scale\n2.234921\n2.200000\n0.5074156\n1.300000\n3.5\n2.200000\n0.85\n\n\n\n\n\nThe mean score for Social Interaction Anxiety was 2.3888889, the mean score for Experiences in Close Relationships Anxiety was 3.3985891, and the mean score for Rosenberg Self-Esteem was 2.2349206.\nFor the female participants specifically, the demographics summary appears as follows:\n\n\n\n\n\n\nDescriptive Statistics and Reliability For Females\n\n\nSummary of Scale Scores for Females\n\n\nScales\nmean\nmedian\nsd\nmin\nmax\nrange\nalphasFemale\n\n\n\n\nSocial_Interaction_Anxiety_Scale\n2.436000\n2.375000\n0.7211838\n1.100000\n4.1\n3.000000\n0.90\n\n\nExperiences_in_Close_Relationships_Anxiety_Subscale\n3.431111\n3.111111\n1.7133507\n1.111111\n7.0\n5.888889\n0.94\n\n\nRosenberg_Self_Esteem_Scale\n2.240000\n2.200000\n0.5318432\n1.300000\n3.5\n2.200000\n0.86\n\n\n\n\n\nThe mean score for the female participants for the Social Interaction Anxiety questionnaire was 2.436, the mean score for Experiences in Close Relationships Anxiety for females was 3.4311111, and the mean score for Rosenberg Self-Esteem for females was 2.24."
+  }
+]

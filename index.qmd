@@ -1,0 +1,203 @@
+---
+title: "9041 Assignment 2"
+author: Selena Esteves
+date: today
+format: 
+    html:
+      toc: true
+      code-fold: true
+      code-summary: "Show code"
+      df-print: paged
+execute:
+    echo: false
+    warning: false
+---
+
+```{r} 
+####Step 4####
+library(tidyverse) 
+library(psych)
+library(readxl)
+library(gt)
+library(janitor)
+
+####Step 5####
+Dataframe_AttachmentAnxiety <- read_excel("Attachment_Anxiety_Data.xlsx")
+
+####Step 6####
+Dataframe_AttachmentAnxiety <- Dataframe_AttachmentAnxiety%>%
+  mutate(Gender = ifelse(Gender == 1, "male", "female"))%>%
+  mutate(Ethnicity = case_when(
+    Ethnicity == 1 ~ "white/Caucasian",
+    Ethnicity == 2 ~ "Asian/Asian British",
+    Ethnicity == 5 ~ "Other ethnic group",
+    Ethnicity == 6 ~ "prefer not to say"
+  )  
+    
+  )
+
+Dataframe_AttachmentAnxiety <- Dataframe_AttachmentAnxiety %>%
+  mutate(across(SA_1:SEst_10, as.integer))
+
+####Step 7####
+Answer_Key <- list(
+  Social_Interaction_Anxiety_Scale = c("SA_1", "SA_2", "SA_3", "SA_4", "-SA_5", "SA_6", "SA_7", "SA_8", "-SA_9", "SA_10", "-SA_11", "SA_12", "SA_13", "SA_14", "SA_15", "SA_16", "SA_17", "SA_18", "SA_19", "SA_20"),
+  Experiences_in_Close_Relationships_Anxiety_Subscale = c("AA_1","AA_2", "AA_3", "AA_4", "AA_5", "AA_6", "AA_7", "AA_8", "AA_9"),
+  Rosenberg_Self_Esteem_Scale = c("SEst_1", "-SEst_2", "SEst_3", "SEst_4", "-SEst_5", "-SEst_6", "SEst_7", "-SEst_8", "-SEst_9", "SEst_10")
+)
+
+####Step 8####
+SA_Score <- scoreItems(
+  keys = Answer_Key["Social_Interaction_Anxiety_Scale"],
+  items = Dataframe_AttachmentAnxiety,
+  min = 0,
+  max = 4)
+
+AA_Score <- scoreItems(
+  keys = Answer_Key["Experiences_in_Close_Relationships_Anxiety_Subscale"],
+  items = Dataframe_AttachmentAnxiety,
+  min = 1,
+  max = 7)
+
+SEst_Score <- scoreItems(
+  keys = Answer_Key["Rosenberg_Self_Esteem_Scale"],
+  items = Dataframe_AttachmentAnxiety,
+  min = 1,
+  max = 4)
+
+SA_score.df <- as.data.frame(SA_Score$scores)
+AA_score.df <- as.data.frame(AA_Score$scores)
+SEst_score.df <- as.data.frame(SEst_Score$scores)
+
+allscores.df <- cbind(SA_score.df, AA_score.df, SEst_score.df)
+
+####Step 9####
+Final_Data <- cbind(Dataframe_AttachmentAnxiety, allscores.df)
+
+####Step 10####
+Reduced_df <- Final_Data%>%
+  select(c("URN", "Gender", "Ethnicity", "Social_Interaction_Anxiety_Scale", "Experiences_in_Close_Relationships_Anxiety_Subscale", "Rosenberg_Self_Esteem_Scale"))
+
+####Step 11####
+demographic.table <- Reduced_df |>
+  tabyl(Gender, Ethnicity) |>
+  gt() |>
+  tab_header(
+    title = "Participant Gender and Ethnicity"
+  )
+
+####Step 12####
+sample_size <- nrow(allscores.df)
+summary <- describe(allscores.df) |>
+  tibble::rownames_to_column("Scales")
+
+alphas <- round(c(
+  SA_Score$alpha,
+  AA_Score$alpha,
+  SEst_Score$alpha
+), 2)
+
+summary_selected <- summary |>
+  select(Scales, mean, median, sd, min, max, range)
+
+summary <- cbind(summary_selected, alphas)
+
+summary_table <- summary |>
+  gt() |>
+  tab_header(
+    title = "Descriptive Statistics and Reliability",
+    subtitle = "Summary of Scale Scores"
+  )
+
+####Step 13####
+FemaleOnly_df <- Final_Data |>
+  filter(Gender == "female")
+
+####Step 14####
+sample_sizeFemaleOnly <- nrow(FemaleOnly_df)
+
+FemaleOnly_scores <- FemaleOnly_df |>
+  select(
+    Social_Interaction_Anxiety_Scale,
+    Experiences_in_Close_Relationships_Anxiety_Subscale,
+    Rosenberg_Self_Esteem_Scale
+  )
+
+summary_filteredGender <- describe(FemaleOnly_scores) |>
+  tibble::rownames_to_column("Scales")
+
+#Calculating alphas again#
+
+SA_ScoreFemale <- scoreItems(
+  keys = Answer_Key["Social_Interaction_Anxiety_Scale"],
+  items = FemaleOnly_df,
+  min = 0,
+  max = 4
+)
+
+AA_ScoreFemale <- scoreItems(
+  keys = Answer_Key["Experiences_in_Close_Relationships_Anxiety_Subscale"],
+  items = FemaleOnly_df,
+  min = 1,
+  max = 7
+)
+
+SEst_ScoreFemale <- scoreItems(
+  keys = Answer_Key["Rosenberg_Self_Esteem_Scale"],
+  items = FemaleOnly_df,
+  min = 1,
+  max = 4
+)
+
+alphasFemale <- round(c(
+  SA_ScoreFemale$alpha,
+  AA_ScoreFemale$alpha,
+  SEst_ScoreFemale$alpha
+), 2)
+
+summary_Filtered_selected <- summary_filteredGender |>
+  select(Scales, mean, median, sd, min, max, range)
+
+summary_filteredGender <- cbind(summary_Filtered_selected, alphasFemale)
+
+summary_tableFiltered <- summary_filteredGender |>
+  gt() |>
+  tab_header(
+    title = "Descriptive Statistics and Reliability For Females",
+    subtitle = "Summary of Scale Scores for Females"
+  )
+
+```
+
+## Intro
+
+Here is my introduction. 
+
+## Methods
+
+Participants were asked to complete a set of questionnaires.
+
+## Participants
+The sample consisted of `r sample_size` participants.
+Here are the participants' demographics: 
+```{r}
+demographic.table 
+```
+
+## Measures
+
+Here is are the measures used: Social Interaction Anxiety Scale Questionnaire, Experiences in Close Relationships Anxiety Subscale Questionnaire, and the Rosenberg Self-Esteem Scale Questionnaire. The  Cronbach’s alphas for the scales are `r alphas[1]`, `r alphas[2]`, and `r alphas[3]`, respectively. 
+
+## Data Analysis Strategies 
+
+Items items 5, 9, and 11 were reverse coded for the Social Interaction Anxiety Scale responses, and  items 2, 5, 6, 8, and 9 for Rosenberg Self-Esteem Scale. This was done by adding a minus sign within the column name bracket (e.g., c(..."-SA_5"))
+
+## Results
+
+Here is the demographics summary table: `r summary_table`
+
+The mean score for Social Interaction Anxiety was `r summary$mean[1]`, the mean score for Experiences in Close Relationships Anxiety was `r summary$mean[2]`, and the mean score for Rosenberg Self-Esteem was `r summary$mean[3]`.
+
+For the female participants specifically, the demographics summary appears as follows:`r summary_tableFiltered`
+
+The mean score for the female participants for the Social Interaction Anxiety questionnaire was `r summary_Filtered_selected$mean[1]`, the mean score for Experiences in Close Relationships Anxiety for females was `r summary_Filtered_selected$mean[2]`, and the mean score for Rosenberg Self-Esteem for females was `r summary_Filtered_selected$mean[3]`. 
